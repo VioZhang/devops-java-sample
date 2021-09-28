@@ -26,7 +26,13 @@ pipeline {
                 checkout(scm)
             }
         }
-
+        stage ('unit test') {
+            steps {
+                container ('maven') {
+                    sh 'mvn clean  -gs `pwd`/configuration/settings.xml test'
+                }
+            }
+        }
 
  
         stage ('build & push') {
